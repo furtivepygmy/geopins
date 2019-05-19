@@ -29,6 +29,11 @@ const reducer = (state, { type, payload }) => {
         ...state,
         draft: payload
       };
+    case 'DELETE_DRAFT':
+      return {
+        ...state,
+        draft: null
+      };
     default:
       return state;
   }
