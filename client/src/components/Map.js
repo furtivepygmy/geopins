@@ -13,7 +13,6 @@ import { DELETE_PIN_MUTATION } from '../graphql/mutations';
 
 import Blog from './Blog';
 import PinIcon from './PinIcon';
-// import { Typography } from '@material-ui/core';
 
 const INITIAL_VIEWPORT = {
   latitude: -4.6166,
@@ -62,6 +61,8 @@ const Map = ({ classes }) => {
       type: 'UPDATE_DRAFT_LOCATION',
       payload: { longitude, latitude }
     });
+
+    setPopup(null);
   };
 
   const highlightNewPin = pin => {
