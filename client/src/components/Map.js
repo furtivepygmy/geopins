@@ -33,10 +33,12 @@ const Map = ({ classes }) => {
         setUserPosition({ latitude, longitude });
       });
     }
+    setUserPosition({ latitude: -4.6166, longitude: 55.4175 }); // Disable this line in production
   };
 
   const handleMapClick = ({ lngLat, leftButton }) => {
     if (!leftButton) return;
+
     // If there is no draft, create a new draft
     if (!state.draft) {
       dispatch({ type: 'CREATE_DRAFT' });
@@ -67,15 +69,7 @@ const Map = ({ classes }) => {
         </div>
 
         {/* Pin for user's current position */}
-        <Marker
-          latitude={-4.6166}
-          longitude={55.4175}
-          offsetLeft={-19}
-          offsetTop={-37}
-        >
-          <PinIcon size={40} color="red" />
-        </Marker>
-        {/* {userPosition && (
+        {userPosition && (
           <Marker
             latitude={userPosition.latitude}
             longitude={userPosition.longitude}
@@ -84,7 +78,7 @@ const Map = ({ classes }) => {
           >
             <PinIcon size={40} color="red" />
           </Marker>
-        )} */}
+        )}
 
         {/* Draft Pin */}
         {state.draft && (

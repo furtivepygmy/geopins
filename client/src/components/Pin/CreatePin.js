@@ -1,5 +1,4 @@
 import React, { useState, useContext } from 'react';
-import { GraphQLClient } from 'graphql-request';
 import axios from 'axios';
 import { withStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
@@ -12,8 +11,12 @@ import SaveIcon from '@material-ui/icons/SaveTwoTone';
 
 import Context from '../../context';
 import { CREATE_PIN_MUTATION } from '../../graphql/mutations';
+import { useClient } from '../../client';
 
 const CreatePin = ({ classes }) => {
+  // Create GraphQL client and set auth token in the authorization header
+  const client = useClient();
+
   const { state, dispatch } = useContext(Context);
   const [title, setTitle] = useState('');
   const [image, setImage] = useState('');
@@ -47,17 +50,6 @@ const CreatePin = ({ classes }) => {
     event.preventDefault();
     try {
       setSubmitting(true);
-
-      // Get auth token
-      const idToken = window.gapi.auth2
-        .getAuthInstance()
-        .currentUser.get()
-        .getAuthResponse().id_token;
-
-      // Create GraphQL client and set auth token in the authorization header
-      const client = new GraphQLClient('http://localhost:4000/graphql', {
-        headers: { authorization: idToken }
-      });
 
       // Upload image and get url
       const url = await handleImageUpload();
