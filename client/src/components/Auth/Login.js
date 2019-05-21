@@ -39,6 +39,10 @@ const Login = ({ classes }) => {
   // Function #2: onFailure
   const onFailure = err => {
     console.error('Error logging in', err);
+    dispatch({
+      type: 'SET_ISAUTH',
+      payload: false
+    });
   };
 
   // Return statement

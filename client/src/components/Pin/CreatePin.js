@@ -66,16 +66,7 @@ const CreatePin = ({ classes }) => {
       };
 
       // Simlar to a POST request, variables object is sent
-      const { createPin } = await client.request(
-        CREATE_PIN_MUTATION,
-        variables
-      );
-
-      console.log('Pin created', { createPin });
-      dispatch({
-        type: 'CREATE_PIN',
-        payload: createPin
-      });
+      await client.request(CREATE_PIN_MUTATION, variables);
 
       handleDeleteDraft();
     } catch (err) {
